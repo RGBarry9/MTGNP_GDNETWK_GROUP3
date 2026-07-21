@@ -1,0 +1,22 @@
+[
+    {
+        "name": "Forest",
+        "card_type": "Land",
+        "mana_cost": "",
+        "text": "Tap: Add G."
+    },
+    {
+        "name": "Mountain",
+        "card_type": "Land",
+        "mana_cost": "",
+        "text": "Tap: Add R."
+    },
+    {
+        "name": "Grizzly Bears",
+        "card_type": "Creature",
+        "mana_cost": "1G",
+        "power": 2,
+        "toughness": 2,
+        "text": ""
+    }
+]

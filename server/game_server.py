@@ -3,13 +3,40 @@ from network.dispatcher import Dispatcher
 
 from protocol.message_types import MessageType
 
+from handlers.lobby_handler import player_ready, mulligan_choice
+from handlers.spell_handler import (
+    cast_spell,
+    play_land,
+    activate_ability
+)
+from handlers.combat_handler import (
+    declare_attackers,
+    declare_blockers,
+    assign_damage_order
+)
+from handlers.priority_handler import (
+    priority_pass,
+    stack_push,
+    stack_resolve
+)
+from handlers.game_handler import (
+    phase_transition,
+    concede,
+    game_over
+)
+
 from engine.gamestate import GameState
-from engine.player import Player
 
 
 class GameServer:
     """
-    Main controller of the MTGNP game server.
+    Main controller for the MTGNP server.
+
+    Responsibilities:
+    - Owns the game state
+    - Owns all network connections
+    - Receives incoming messages
+    - Dispatches messages to handlers
     """
 
     def __init__(self):
@@ -23,10 +50,81 @@ class GameServer:
 
         self.game_state = GameState()
 
-        # Register message handlers
+        self.register_handlers()
+
+    def register_handlers(self):
+        """
+        Register all protocol message handlers.
+        """
+
         self.dispatcher.register(
             MessageType.PLAYER_READY.value,
-            self.on_player_ready
+            lambda message: player_ready(self, message)
+        )
+
+        self.dispatcher.register(
+            MessageType.MULLIGAN_CHOICE.value,
+            lambda message: mulligan_choice(self, message)
+        )
+
+        self.dispatcher.register(
+            MessageType.CAST_SPELL.value,
+            lambda message: cast_spell(self, message)
+        )
+
+        self.dispatcher.register(
+            MessageType.PLAY_LAND.value,
+            lambda message: play_land(self, message)
+        )
+
+        self.dispatcher.register(
+            MessageType.ACTIVATE_ABILITY.value,
+            lambda message: activate_ability(self, message)
+        )
+
+        self.dispatcher.register(
+            MessageType.DECLARE_ATTACKERS.value,
+            lambda message: declare_attackers(self, message)
+        )
+
+        self.dispatcher.register(
+            MessageType.DECLARE_BLOCKERS.value,
+            lambda message: declare_blockers(self, message)
+        )
+
+        self.dispatcher.register(
+            MessageType.ASSIGN_DAMAGE_ORDER.value,
+            lambda message: assign_damage_order(self, message)
+        )
+
+        self.dispatcher.register(
+            MessageType.PRIORITY_PASS.value,
+            lambda message: priority_pass(self, message)
+        )
+
+        self.dispatcher.register(
+            MessageType.STACK_PUSH.value,
+            lambda message: stack_push(self, message)
+        )
+
+        self.dispatcher.register(
+            MessageType.STACK_RESOLVE.value,
+            lambda message: stack_resolve(self, message)
+        )
+
+        self.dispatcher.register(
+            MessageType.PHASE_TRANSITION.value,
+            lambda message: phase_transition(self, message)
+        )
+
+        self.dispatcher.register(
+            MessageType.CONCEDE.value,
+            lambda message: concede(self, message)
+        )
+
+        self.dispatcher.register(
+            MessageType.GAME_OVER.value,
+            lambda message: game_over(self, message)
         )
 
     def start(self):
@@ -38,7 +136,7 @@ class GameServer:
         self.running = True
 
         print("\nGame server ready.")
-        print("Waiting for player messages...\n")
+        print("Waiting for messages...\n")
 
         self.game_loop()
 
@@ -55,26 +153,90 @@ class GameServer:
 
                 self.dispatcher.dispatch(message)
 
-    def on_player_ready(self, message):
+    # ==========================================================
+    # Utility Methods
+    # ==========================================================
+
+    def broadcast(self, message):
         """
-        Handles PLAYER_READY messages.
+        Send a message to every connected player.
         """
 
-        player = Player(
-            player_id=message["player_id"],
-            ready=True
-        )
+        for connection in self.connections:
+            connection.send(message)
 
-        self.game_state.add_player(player)
+    # ==========================================================
+    # Lobby
+    # ==========================================================
 
-        print(f"{player.player_id} is ready.")
-        print(f"Players Ready: {len(self.game_state.players)}/2")
+    def player_ready(self, message):
+        print("PLAYER_READY")
+        print(message)
 
-        if self.game_state.all_players_ready():
+    def mulligan_choice(self, message):
+        print("MULLIGAN_CHOICE")
+        print(message)
 
-            self.game_state.started = True
+    # ==========================================================
+    # Gameplay
+    # ==========================================================
 
-            print("\n===================================")
-            print("Both players are ready!")
-            print("The game can now begin.")
-            print("===================================\n")
+    def cast_spell(self, message):
+        print("CAST_SPELL")
+        print(message)
+
+    def play_land(self, message):
+        print("PLAY_LAND")
+        print(message)
+
+    def activate_ability(self, message):
+        print("ACTIVATE_ABILITY")
+        print(message)
+
+    # ==========================================================
+    # Combat
+    # ==========================================================
+
+    def declare_attackers(self, message):
+        print("DECLARE_ATTACKERS")
+        print(message)
+
+    def declare_blockers(self, message):
+        print("DECLARE_BLOCKERS")
+        print(message)
+
+    def assign_damage_order(self, message):
+        print("ASSIGN_DAMAGE_ORDER")
+        print(message)
+
+    # ==========================================================
+    # Priority / Stack
+    # ==========================================================
+
+    def priority_pass(self, message):
+        print("PRIORITY_PASS")
+        print(message)
+
+    def stack_push(self, message):
+        print("STACK_PUSH")
+        print(message)
+
+    def stack_resolve(self, message):
+        print("STACK_RESOLVE")
+        print(message)
+
+    # ==========================================================
+    # General Game
+    # ==========================================================
+
+    def phase_transition(self, message):
+        print("PHASE_TRANSITION")
+        print(message)
+
+    def concede(self, message):
+        print("CONCEDE")
+        print(message)
+
+    def game_over(self, message):
+        print("GAME_OVER")
+        print(message)

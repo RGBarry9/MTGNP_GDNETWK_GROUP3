@@ -1,13 +1,17 @@
-def player_ready(message):
+"""
+Lobby message handlers.
+"""
 
-    print("\nPLAYER_READY RECEIVED")
 
-    print("----------------------")
+def player_ready(game_server, message):
+    """
+    Handle PLAYER_READY.
+    """
+    game_server.player_ready(message)
 
-    print(f"Player ID : {message['player_id']}")
 
-    print(f"Sequence  : {message['seq_num']}")
-
-    print(f"Deck Size : {len(message['deck_list'])}")
-
-    print()
+def mulligan_choice(game_server, message):
+    """
+    Handle MULLIGAN_CHOICE.
+    """
+    game_server.mulligan_choice(message)
