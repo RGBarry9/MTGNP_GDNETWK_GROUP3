@@ -1,0 +1,100 @@
+Draft structure
+
+mtgnp/
+│
+├── main_server.py              # Starts the server
+├── main_client.py              # Starts a client
+├── requirements.txt
+├── README.md
+├── .gitignore
+│
+├── config/
+│   ├── __init__.py
+│   ├── settings.py             # Port, host, constants
+│   └── enums.py                # Game enums
+│
+├── protocol/
+│   ├── __init__.py
+│   ├── framing.py              # 4-byte length prefix
+│   ├── serializer.py           # JSON encode/decode
+│   ├── message_types.py        # All MTGNP message names
+│   ├── validator.py            # Validate incoming PDUs
+│   └── protocol.py             # Shared protocol helpers
+│
+├── network/
+│   ├── __init__.py
+│   ├── server.py               # TCP server
+│   ├── client.py               # TCP client
+│   ├── connection.py           # Connection wrapper
+│   └── dispatcher.py           # Routes messages
+│
+├── engine/
+│   ├── __init__.py
+│   │
+│   ├── game.py                 # Main game controller
+│   ├── gamestate.py            # Complete game state
+│   ├── turn.py                 # Turn manager
+│   ├── priority.py             # Priority manager
+│   ├── stack.py                # Spell stack
+│   ├── combat.py               # Combat system
+│   ├── mulligan.py
+│   ├── winconditions.py
+│   └── validator.py            # Rule validation
+│
+├── models/
+│   ├── __init__.py
+│   │
+│   ├── player.py
+│   ├── card.py
+│   ├── deck.py
+│   ├── hand.py
+│   ├── library.py
+│   ├── battlefield.py
+│   ├── graveyard.py
+│   ├── stack_item.py
+│   └── ability.py
+│
+├── cards/
+│   ├── __init__.py
+│   ├── loader.py
+│   └── cards.json
+│
+├── effects/
+│   ├── __init__.py
+│   ├── damage.py
+│   ├── draw.py
+│   ├── destroy.py
+│   ├── counter.py
+│   ├── discard.py
+│   ├── gain_life.py
+│   └── effect_manager.py
+│
+├── handlers/
+│   ├── __init__.py
+│   ├── lobby_handler.py
+│   ├── game_handler.py
+│   ├── combat_handler.py
+│   ├── priority_handler.py
+│   └── spell_handler.py
+│
+├── client_ui/
+│   ├── __init__.py
+│   ├── renderer.py
+│   ├── command_parser.py
+│   └── terminal.py
+│
+├── utils/
+│   ├── __init__.py
+│   ├── logger.py
+│   ├── helpers.py
+│   └── id_generator.py
+│
+├── tests/
+│   ├── test_protocol.py
+│   ├── test_stack.py
+│   ├── test_combat.py
+│   ├── test_cards.py
+│   └── test_network.py
+│
+└── docs/
+    └── protocol_notes.md
