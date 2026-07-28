@@ -39,7 +39,8 @@ mtgnp/
 │   ├── combat.py               # Combat system
 │   ├── mulligan.py
 │   ├── winconditions.py
-│   └── validator.py            # Rule validation
+│   ├── validator.py            # Rule validation
+│   └── player.py
 │
 ├── models/
 │   ├── __init__.py
@@ -54,10 +55,11 @@ mtgnp/
 │   ├── stack_item.py
 │   └── ability.py
 │
-├── cards/
+├── game/
 │   ├── __init__.py
 │   ├── loader.py
-│   └── cards.json
+│   ├── cards.json
+│   └── deck.py
 │
 ├── effects/
 │   ├── __init__.py

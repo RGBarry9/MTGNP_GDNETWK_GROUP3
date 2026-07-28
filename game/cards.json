@@ -1,22 +1,687 @@
 [
     {
+        "card_id": "forest_001",
         "name": "Forest",
         "card_type": "Land",
         "mana_cost": "",
-        "text": "Tap: Add G."
+        "text": "Tap: Add G.",
+        "colors": ["G"],
+        "effects": []
     },
     {
+        "card_id": "forest_002",
+        "name": "Forest",
+        "card_type": "Land",
+        "mana_cost": "",
+        "text": "Tap: Add G.",
+        "colors": ["G"],
+        "effects": []
+    },
+    {
+        "card_id": "forest_003",
+        "name": "Forest",
+        "card_type": "Land",
+        "mana_cost": "",
+        "text": "Tap: Add G.",
+        "colors": ["G"],
+        "effects": []
+    },
+    {
+        "card_id": "forest_004",
+        "name": "Forest",
+        "card_type": "Land",
+        "mana_cost": "",
+        "text": "Tap: Add G.",
+        "colors": ["G"],
+        "effects": []
+    },
+    {
+        "card_id": "mountain_001",
         "name": "Mountain",
         "card_type": "Land",
         "mana_cost": "",
-        "text": "Tap: Add R."
+        "text": "Tap: Add R.",
+        "colors": ["R"],
+        "effects": []
     },
     {
+        "card_id": "mountain_002",
+        "name": "Mountain",
+        "card_type": "Land",
+        "mana_cost": "",
+        "text": "Tap: Add R.",
+        "colors": ["R"],
+        "effects": []
+    },
+    {
+        "card_id": "mountain_003",
+        "name": "Mountain",
+        "card_type": "Land",
+        "mana_cost": "",
+        "text": "Tap: Add R.",
+        "colors": ["R"],
+        "effects": []
+    },
+    {
+        "card_id": "mountain_004",
+        "name": "Mountain",
+        "card_type": "Land",
+        "mana_cost": "",
+        "text": "Tap: Add R.",
+        "colors": ["R"],
+        "effects": []
+    },
+    {
+        "card_id": "island_001",
+        "name": "Island",
+        "card_type": "Land",
+        "mana_cost": "",
+        "text": "Tap: Add U.",
+        "colors": ["U"],
+        "effects": []
+    },
+    {
+        "card_id": "island_002",
+        "name": "Island",
+        "card_type": "Land",
+        "mana_cost": "",
+        "text": "Tap: Add U.",
+        "colors": ["U"],
+        "effects": []
+    },
+    {
+        "card_id": "island_003",
+        "name": "Island",
+        "card_type": "Land",
+        "mana_cost": "",
+        "text": "Tap: Add U.",
+        "colors": ["U"],
+        "effects": []
+    },
+    {
+        "card_id": "island_004",
+        "name": "Island",
+        "card_type": "Land",
+        "mana_cost": "",
+        "text": "Tap: Add U.",
+        "colors": ["U"],
+        "effects": []
+    },
+    {
+        "card_id": "swamp_001",
+        "name": "Swamp",
+        "card_type": "Land",
+        "mana_cost": "",
+        "text": "Tap: Add B.",
+        "colors": ["B"],
+        "effects": []
+    },
+    {
+        "card_id": "swamp_002",
+        "name": "Swamp",
+        "card_type": "Land",
+        "mana_cost": "",
+        "text": "Tap: Add B.",
+        "colors": ["B"],
+        "effects": []
+    },
+    {
+        "card_id": "swamp_003",
+        "name": "Swamp",
+        "card_type": "Land",
+        "mana_cost": "",
+        "text": "Tap: Add B.",
+        "colors": ["B"],
+        "effects": []
+    },
+    {
+        "card_id": "swamp_004",
+        "name": "Swamp",
+        "card_type": "Land",
+        "mana_cost": "",
+        "text": "Tap: Add B.",
+        "colors": ["B"],
+        "effects": []
+    },
+    {
+        "card_id": "plains_001",
+        "name": "Plains",
+        "card_type": "Land",
+        "mana_cost": "",
+        "text": "Tap: Add W.",
+        "colors": ["W"],
+        "effects": []
+    },
+    {
+        "card_id": "plains_002",
+        "name": "Plains",
+        "card_type": "Land",
+        "mana_cost": "",
+        "text": "Tap: Add W.",
+        "colors": ["W"],
+        "effects": []
+    },
+    {
+        "card_id": "plains_003",
+        "name": "Plains",
+        "card_type": "Land",
+        "mana_cost": "",
+        "text": "Tap: Add W.",
+        "colors": ["W"],
+        "effects": []
+    },
+    {
+        "card_id": "plains_004",
+        "name": "Plains",
+        "card_type": "Land",
+        "mana_cost": "",
+        "text": "Tap: Add W.",
+        "colors": ["W"],
+        "effects": []
+    },
+    {
+        "card_id": "grizzly_bears_001",
         "name": "Grizzly Bears",
         "card_type": "Creature",
         "mana_cost": "1G",
         "power": 2,
         "toughness": 2,
-        "text": ""
+        "text": "",
+        "colors": ["G"],
+        "keywords": [],
+        "effects": []
+    },
+    {
+        "card_id": "grizzly_bears_002",
+        "name": "Grizzly Bears",
+        "card_type": "Creature",
+        "mana_cost": "1G",
+        "power": 2,
+        "toughness": 2,
+        "text": "",
+        "colors": ["G"],
+        "keywords": [],
+        "effects": []
+    },
+    {
+        "card_id": "goblin_guide_001",
+        "name": "Goblin Guide",
+        "card_type": "Creature",
+        "mana_cost": "R",
+        "power": 2,
+        "toughness": 2,
+        "text": "Haste",
+        "colors": ["R"],
+        "keywords": ["Haste"],
+        "effects": []
+    },
+    {
+        "card_id": "goblin_guide_002",
+        "name": "Goblin Guide",
+        "card_type": "Creature",
+        "mana_cost": "R",
+        "power": 2,
+        "toughness": 2,
+        "text": "Haste",
+        "colors": ["R"],
+        "keywords": ["Haste"],
+        "effects": []
+    },
+    {
+        "card_id": "wall_of_stone_001",
+        "name": "Wall of Stone",
+        "card_type": "Creature",
+        "mana_cost": "1RR",
+        "power": 0,
+        "toughness": 8,
+        "text": "Defender",
+        "colors": ["R"],
+        "keywords": ["Defender"],
+        "effects": []
+    },
+    {
+        "card_id": "wall_of_stone_002",
+        "name": "Wall of Stone",
+        "card_type": "Creature",
+        "mana_cost": "1RR",
+        "power": 0,
+        "toughness": 8,
+        "text": "Defender",
+        "colors": ["R"],
+        "keywords": ["Defender"],
+        "effects": []
+    },
+    {
+        "card_id": "gray_merchant_001",
+        "name": "Gray Merchant of Asphodel",
+        "card_type": "Creature",
+        "mana_cost": "3BB",
+        "power": 2,
+        "toughness": 4,
+        "text": "When Gray Merchant enters, each opponent loses X life where X is your devotion to black.",
+        "colors": ["B"],
+        "keywords": [],
+        "effects": [],
+        "trigger": {
+            "event": "ENTER_BATTLEFIELD",
+            "effect": {
+                "effect_type": "DAMAGE_ALL_OPPONENTS",
+                "amount_source": "devotion_black"
+            }
+        }
+    },
+    {
+        "card_id": "gray_merchant_002",
+        "name": "Gray Merchant of Asphodel",
+        "card_type": "Creature",
+        "mana_cost": "3BB",
+        "power": 2,
+        "toughness": 4,
+        "text": "When Gray Merchant enters, each opponent loses X life where X is your devotion to black.",
+        "colors": ["B"],
+        "keywords": [],
+        "effects": [],
+        "trigger": {
+            "event": "ENTER_BATTLEFIELD",
+            "effect": {
+                "effect_type": "DAMAGE_ALL_OPPONENTS",
+                "amount_source": "devotion_black"
+            }
+        }
+    },
+    {
+        "card_id": "lightning_bolt_001",
+        "name": "Lightning Bolt",
+        "card_type": "Instant",
+        "mana_cost": "R",
+        "text": "Deal 3 damage to any target.",
+        "colors": ["R"],
+        "effects": [
+            {
+                "effect_type": "DAMAGE",
+                "amount": 3,
+                "target_type": "ANY"
+            }
+        ]
+    },
+    {
+        "card_id": "lightning_bolt_002",
+        "name": "Lightning Bolt",
+        "card_type": "Instant",
+        "mana_cost": "R",
+        "text": "Deal 3 damage to any target.",
+        "colors": ["R"],
+        "effects": [
+            {
+                "effect_type": "DAMAGE",
+                "amount": 3,
+                "target_type": "ANY"
+            }
+        ]
+    },
+    {
+        "card_id": "lightning_bolt_003",
+        "name": "Lightning Bolt",
+        "card_type": "Instant",
+        "mana_cost": "R",
+        "text": "Deal 3 damage to any target.",
+        "colors": ["R"],
+        "effects": [
+            {
+                "effect_type": "DAMAGE",
+                "amount": 3,
+                "target_type": "ANY"
+            }
+        ]
+    },
+    {
+        "card_id": "shock_001",
+        "name": "Shock",
+        "card_type": "Instant",
+        "mana_cost": "R",
+        "text": "Deal 2 damage to any target.",
+        "colors": ["R"],
+        "effects": [
+            {
+                "effect_type": "DAMAGE",
+                "amount": 2,
+                "target_type": "ANY"
+            }
+        ]
+    },
+    {
+        "card_id": "shock_002",
+        "name": "Shock",
+        "card_type": "Instant",
+        "mana_cost": "R",
+        "text": "Deal 2 damage to any target.",
+        "colors": ["R"],
+        "effects": [
+            {
+                "effect_type": "DAMAGE",
+                "amount": 2,
+                "target_type": "ANY"
+            }
+        ]
+    },
+    {
+        "card_id": "counterspell_001",
+        "name": "Counterspell",
+        "card_type": "Instant",
+        "mana_cost": "UU",
+        "text": "Counter target spell.",
+        "colors": ["U"],
+        "effects": [
+            {
+                "effect_type": "COUNTER",
+                "target_type": "SPELL"
+            }
+        ]
+    },
+    {
+        "card_id": "counterspell_002",
+        "name": "Counterspell",
+        "card_type": "Instant",
+        "mana_cost": "UU",
+        "text": "Counter target spell.",
+        "colors": ["U"],
+        "effects": [
+            {
+                "effect_type": "COUNTER",
+                "target_type": "SPELL"
+            }
+        ]
+    },
+    {
+        "card_id": "healing_grace_001",
+        "name": "Healing Grace",
+        "card_type": "Instant",
+        "mana_cost": "W",
+        "text": "Gain 3 life.",
+        "colors": ["W"],
+        "effects": [
+            {
+                "effect_type": "GAIN_LIFE",
+                "amount": 3,
+                "target_type": "CONTROLLER"
+            }
+        ]
+    },
+    {
+        "card_id": "healing_grace_002",
+        "name": "Healing Grace",
+        "card_type": "Instant",
+        "mana_cost": "W",
+        "text": "Gain 3 life.",
+        "colors": ["W"],
+        "effects": [
+            {
+                "effect_type": "GAIN_LIFE",
+                "amount": 3,
+                "target_type": "CONTROLLER"
+            }
+        ]
+    },
+    {
+        "card_id": "divination_001",
+        "name": "Divination",
+        "card_type": "Sorcery",
+        "mana_cost": "2U",
+        "text": "Draw two cards.",
+        "colors": ["U"],
+        "effects": [
+            {
+                "effect_type": "DRAW",
+                "amount": 2,
+                "target_type": "CONTROLLER"
+            }
+        ]
+    },
+    {
+        "card_id": "murder_001",
+        "name": "Murder",
+        "card_type": "Instant",
+        "mana_cost": "1BB",
+        "text": "Destroy target creature.",
+        "colors": ["B"],
+        "effects": [
+            {
+                "effect_type": "DESTROY",
+                "target_type": "CREATURE"
+            }
+        ]
+    },
+    {
+        "card_id": "murder_002",
+        "name": "Murder",
+        "card_type": "Instant",
+        "mana_cost": "1BB",
+        "text": "Destroy target creature.",
+        "colors": ["B"],
+        "effects": [
+            {
+                "effect_type": "DESTROY",
+                "target_type": "CREATURE"
+            }
+        ]
+    },
+    {
+        "card_id": "duress_001",
+        "name": "Duress",
+        "card_type": "Sorcery",
+        "mana_cost": "B",
+        "text": "Target opponent reveals their hand. You choose a noncreature, nonland card from it. That player discards that card.",
+        "colors": ["B"],
+        "effects": [
+            {
+                "effect_type": "DISCARD_CHOOSE",
+                "target_type": "OPPONENT",
+                "card_types": ["Instant", "Sorcery", "Enchantment", "Artifact", "Planeswalker"]
+            }
+        ]
+    },
+    {
+        "card_id": "giant_growth_001",
+        "name": "Giant Growth",
+        "card_type": "Instant",
+        "mana_cost": "G",
+        "text": "Target creature gets +3/+3 until end of turn.",
+        "colors": ["G"],
+        "effects": [
+            {
+                "effect_type": "BUFF",
+                "power": 3,
+                "toughness": 3,
+                "duration": "UNTIL_END_OF_TURN",
+                "target_type": "CREATURE"
+            }
+        ]
+    },
+    {
+        "card_id": "giant_growth_002",
+        "name": "Giant Growth",
+        "card_type": "Instant",
+        "mana_cost": "G",
+        "text": "Target creature gets +3/+3 until end of turn.",
+        "colors": ["G"],
+        "effects": [
+            {
+                "effect_type": "BUFF",
+                "power": 3,
+                "toughness": 3,
+                "duration": "UNTIL_END_OF_TURN",
+                "target_type": "CREATURE"
+            }
+        ]
+    },
+    {
+        "card_id": "llanowar_elves_001",
+        "name": "Llanowar Elves",
+        "card_type": "Creature",
+        "mana_cost": "G",
+        "power": 1,
+        "toughness": 1,
+        "text": "Tap: Add G.",
+        "colors": ["G"],
+        "keywords": [],
+        "effects": [],
+        "abilities": [
+            {
+                "name": "Add Green Mana",
+                "ability_type": "MANA",
+                "cost": {"tap": true},
+                "effect": {
+                    "effect_type": "ADD_MANA",
+                    "amount": 1,
+                    "color": "G",
+                    "target_type": "CONTROLLER"
+                }
+            }
+        ]
+    },
+    {
+        "card_id": "llanowar_elves_002",
+        "name": "Llanowar Elves",
+        "card_type": "Creature",
+        "mana_cost": "G",
+        "power": 1,
+        "toughness": 1,
+        "text": "Tap: Add G.",
+        "colors": ["G"],
+        "keywords": [],
+        "effects": [],
+        "abilities": [
+            {
+                "name": "Add Green Mana",
+                "ability_type": "MANA",
+                "cost": {"tap": true},
+                "effect": {
+                    "effect_type": "ADD_MANA",
+                    "amount": 1,
+                    "color": "G",
+                    "target_type": "CONTROLLER"
+                }
+            }
+        ]
+    },
+    {
+        "card_id": "elvish_visionary_001",
+        "name": "Elvish Visionary",
+        "card_type": "Creature",
+        "mana_cost": "1G",
+        "power": 1,
+        "toughness": 1,
+        "text": "When Elvish Visionary enters, draw a card.",
+        "colors": ["G"],
+        "keywords": [],
+        "effects": [],
+        "trigger": {
+            "event": "ENTER_BATTLEFIELD",
+            "effect": {
+                "effect_type": "DRAW",
+                "amount": 1,
+                "target_type": "CONTROLLER"
+            }
+        }
+    },
+    {
+        "card_id": "savannah_lions_001",
+        "name": "Savannah Lions",
+        "card_type": "Creature",
+        "mana_cost": "W",
+        "power": 2,
+        "toughness": 1,
+        "text": "",
+        "colors": ["W"],
+        "keywords": [],
+        "effects": []
+    },
+    {
+        "card_id": "savannah_lions_002",
+        "name": "Savannah Lions",
+        "card_type": "Creature",
+        "mana_cost": "W",
+        "power": 2,
+        "toughness": 1,
+        "text": "",
+        "colors": ["W"],
+        "keywords": [],
+        "effects": []
+    },
+    {
+        "card_id": "hill_giant_001",
+        "name": "Hill Giant",
+        "card_type": "Creature",
+        "mana_cost": "3R",
+        "power": 3,
+        "toughness": 3,
+        "text": "",
+        "colors": ["R"],
+        "keywords": [],
+        "effects": []
+    },
+    {
+        "card_id": "hill_giant_002",
+        "name": "Hill Giant",
+        "card_type": "Creature",
+        "mana_cost": "3R",
+        "power": 3,
+        "toughness": 3,
+        "text": "",
+        "colors": ["R"],
+        "keywords": [],
+        "effects": []
+    },
+    {
+        "card_id": "raging_goblin_001",
+        "name": "Raging Goblin",
+        "card_type": "Creature",
+        "mana_cost": "R",
+        "power": 1,
+        "toughness": 1,
+        "text": "Haste",
+        "colors": ["R"],
+        "keywords": ["Haste"],
+        "effects": []
+    },
+    {
+        "card_id": "raging_goblin_002",
+        "name": "Raging Goblin",
+        "card_type": "Creature",
+        "mana_cost": "R",
+        "power": 1,
+        "toughness": 1,
+        "text": "Haste",
+        "colors": ["R"],
+        "keywords": ["Haste"],
+        "effects": []
+    },
+    {
+        "card_id": "disenchant_001",
+        "name": "Disenchant",
+        "card_type": "Instant",
+        "mana_cost": "1W",
+        "text": "Destroy target artifact or enchantment.",
+        "colors": ["W"],
+        "effects": [
+            {
+                "effect_type": "DESTROY",
+                "target_type": "ARTIFACT_OR_ENCHANTMENT"
+            }
+        ]
+    },
+    {
+        "card_id": "naturalize_001",
+        "name": "Naturalize",
+        "card_type": "Instant",
+        "mana_cost": "1G",
+        "text": "Destroy target artifact or enchantment.",
+        "colors": ["G"],
+        "effects": [
+            {
+                "effect_type": "DESTROY",
+                "target_type": "ARTIFACT_OR_ENCHANTMENT"
+            }
+        ]
     }
 ]
