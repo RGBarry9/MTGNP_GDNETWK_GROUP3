@@ -25,7 +25,7 @@ LANDS_PER_TURN = 1
 FIRST_PLAYER_DRAWS = False
 
 # Card Database
-CARD_DATABASE = "cards/cards.json"
+CARD_DATABASE = "game/cards.json"
 
 # Logging
 LOG_LEVEL = "INFO"
