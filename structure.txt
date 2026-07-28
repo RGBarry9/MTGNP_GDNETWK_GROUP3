@@ -8,12 +8,12 @@ mtgnp/
 ├── README.md
 ├── .gitignore
 │
-├── config/
+├── config/                     #final
 │   ├── __init__.py
 │   ├── settings.py             # Port, host, constants
 │   └── enums.py                # Game enums
 │
-├── protocol/
+├── protocol/                   #final
 │   ├── __init__.py
 │   ├── framing.py              # 4-byte length prefix
 │   ├── serializer.py           # JSON encode/decode
@@ -21,7 +21,7 @@ mtgnp/
 │   ├── validator.py            # Validate incoming PDUs
 │   └── protocol.py             # Shared protocol helpers
 │
-├── network/
+├── network/                    #final
 │   ├── __init__.py
 │   ├── server.py               # TCP server
 │   ├── client.py               # TCP client
@@ -42,7 +42,7 @@ mtgnp/
 │   ├── validator.py            # Rule validation
 │   └── player.py
 │
-├── models/
+├── models/                     #final
 │   ├── __init__.py
 │   │
 │   ├── player.py
@@ -55,7 +55,7 @@ mtgnp/
 │   ├── stack_item.py
 │   └── ability.py
 │
-├── game/
+├── game/                       #final
 │   ├── __init__.py
 │   ├── loader.py
 │   ├── cards.json

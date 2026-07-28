@@ -211,3 +211,58 @@ class Player:
         """
 
         self.ready = False
+
+
+    #additional helpers
+    def get_hand_size(self) -> int:
+        """Return the number of cards in hand."""
+        return len(self.hand)
+
+    def get_library_size(self) -> int:
+        """Return the number of cards in library."""
+        return len(self.library)
+
+    def get_battlefield_size(self) -> int:
+        """Return the number of permanents on battlefield."""
+        return len(self.battlefield)
+
+    def get_graveyard_size(self) -> int:
+        """Return the number of cards in graveyard."""
+        return len(self.graveyard)
+
+    def get_creatures(self):
+        """Return all creatures on the battlefield."""
+        return self.battlefield.get_creatures()
+
+    def get_untapped_creatures(self):
+        """Return all untapped creatures on the battlefield."""
+        return self.battlefield.get_untapped_creatures()
+
+    def get_attackers(self):
+        """Return all creatures that can attack (no summoning sickness, untapped)."""
+        return self.battlefield.get_creatures_without_summoning_sickness()
+
+    def can_play_land(self) -> bool:
+        """Check if the player can play a land this turn."""
+        return self.lands_played < 1
+
+    def get_mana_pool_summary(self) -> str:
+        """Get a string summary of the mana pool."""
+        if not self.mana_pool:
+            return "Empty"
+        return ", ".join(f"{k}: {v}" for k, v in self.mana_pool.items())
+
+    def to_dict(self) -> dict:
+        """Convert player to dictionary for GAME_STATE_UPDATE."""
+        return {
+            "player_id": self.player_id,
+            "name": self.name,
+            "life": self.life,
+            "mana_pool": self.mana_pool,
+            "lands_played": self.lands_played,
+            "ready": self.ready,
+            "hand_count": len(self.hand),
+            "library_count": len(self.library),
+            "battlefield_count": len(self.battlefield),
+            "graveyard_count": len(self.graveyard)
+        }
