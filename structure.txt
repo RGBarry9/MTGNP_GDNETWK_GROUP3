@@ -61,7 +61,7 @@ mtgnp/
 │   ├── cards.json
 │   └── deck.py
 │
-├── effects/
+├── effects/                    #final               
 │   ├── __init__.py
 │   ├── damage.py
 │   ├── draw.py
