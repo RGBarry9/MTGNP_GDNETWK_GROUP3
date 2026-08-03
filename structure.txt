@@ -28,7 +28,7 @@ mtgnp/
 │   ├── connection.py           # Connection wrapper
 │   └── dispatcher.py           # Routes messages
 │
-├── engine/
+├── engine/                     #final 
 │   ├── __init__.py
 │   │
 │   ├── game.py                 # Main game controller
@@ -71,7 +71,7 @@ mtgnp/
 │   ├── gain_life.py
 │   └── effect_manager.py
 │
-├── handlers/
+├── handlers/                   #final 
 │   ├── __init__.py
 │   ├── lobby_handler.py
 │   ├── game_handler.py
