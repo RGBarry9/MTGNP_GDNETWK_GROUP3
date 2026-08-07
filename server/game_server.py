@@ -313,7 +313,7 @@ class GameServer:
             traceback.print_exc()
     
     # ==========================================================
-    # MAIN LOOP
+    # MAIN LOOP - FIXED WITH DISCONNECT HANDLING
     # ==========================================================
     
     def start(self):
@@ -331,13 +331,69 @@ class GameServer:
     def _main_loop(self):
         """Main server loop - receive and dispatch messages."""
         while self.running:
-            for conn in self.connections:
-                message = conn.receive()
-                if message is None:
+            # Use a copy of connections list to avoid modification issues
+            for conn in self.connections[:]:
+                try:
+                    message = conn.receive()
+                    if message is None:
+                        # Connection closed by client
+                        if self.verbose:
+                            print(f"🔌 Client disconnected (received None)")
+                        self._handle_disconnect(conn)
+                        continue
+                    if self.verbose:
+                        print(f"\n[RECV] {message.get('type')}")
+                    self.dispatcher.dispatch(message)
+                except ConnectionResetError:
+                    # Client disconnected abruptly
+                    if self.verbose:
+                        print(f"⚠️ Client disconnected abruptly")
+                    self._handle_disconnect(conn)
+                except Exception as e:
+                    if self.verbose:
+                        print(f"⚠️ Error in main loop: {e}")
                     continue
-                if self.verbose:
-                    print(f"\n[RECV] {message.get('type')}")
-                self.dispatcher.dispatch(message)
+        
+        if self.verbose:
+            print("🛑 Server main loop ended")
+    
+    def _handle_disconnect(self, conn):
+        """Handle a client disconnecting."""
+        if self.verbose:
+            print(f"🔌 Handling client disconnect")
+        
+        # Remove from connections
+        if conn in self.connections:
+            self.connections.remove(conn)
+            if self.verbose:
+                print(f"   📤 Removed connection from list ({len(self.connections)} remaining)")
+        
+        # Clean up player tracking
+        player_id = None
+        if conn in self.player_connections:
+            player_id = self.player_connections[conn]
+            del self.player_connections[conn]
+            if self.verbose:
+                print(f"   👤 Removed player {player_id} from player_connections")
+        
+        if player_id and player_id in self.connection_player:
+            del self.connection_player[player_id]
+            if self.verbose:
+                print(f"   👤 Removed player {player_id} from connection_player")
+        
+        # Close the connection
+        try:
+            conn.close()
+            if self.verbose:
+                print(f"   🔌 Connection closed")
+        except:
+            pass
+        
+        # If both players disconnected, stop the server
+        if len(self.connections) == 0:
+            if self.verbose:
+                print("   🛑 No clients remaining, stopping server")
+            self.running = False
     
     def stop(self):
         """Stop the server."""
