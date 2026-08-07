@@ -49,16 +49,13 @@ class MulliganManager:
         Draw the starting hand of 7 cards for a player.
         """
         player.hand.clear()
-        
-        print(f"   📄 {player.player_id} drawing from library with {len(player.library)} cards")
-        
+
         for _ in range(self.STARTING_HAND_SIZE):
             card = player.library.draw()
             if card is None:
-                print(f"   ⚠️ {player.player_id} library empty after {_} cards")
                 break
             player.hand.add(card)
-        
+
         print(f"   📄 {player.player_id} drew {len(player.hand)} cards")
 
     # ======================================================
@@ -156,7 +153,7 @@ class MulliganManager:
             card = self._find_card_in_hand(player, card_id)
             if card:
                 player.hand.remove(card)
-                player.library.add(card)
+                player.library.add(card)  # Adds to bottom
                 print(f"   📥 {player.player_id} bottomed {card.name}")
 
     def bottom_cards_auto(self, player: Player, amount: int) -> None:

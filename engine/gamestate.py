@@ -8,9 +8,6 @@ from config.enums import Phase, GameState as GameStateEnum
 class GameState:
     """
     Stores the complete state of a single MTGNP game.
-
-    This class owns all mutable game data but does not implement
-    game rules. Rule enforcement belongs to the engine managers.
     """
 
     def __init__(self):
@@ -29,7 +26,7 @@ class GameState:
         self.started = False
         self.game_over = False
         self.winner = None
-        self.game_state = GameStateEnum.LOBBY
+        self.game_state = GameStateEnum.LOBBY  # ← LOBBY is GameState, not Phase
 
         # ==================================================
         # Turn Information
@@ -37,7 +34,7 @@ class GameState:
 
         self.turn_number = 1
         self.active_player = None
-        self.current_phase = Phase.UNTAP
+        self.current_phase = Phase.UNTAP  # ← Use a valid Phase value
 
         # ==================================================
         # Priority
@@ -149,7 +146,7 @@ class GameState:
         """Reset priority for a new priority cycle."""
         self.priority_passes = 0
         self.priority_player = None
-        self.priority_seq_num += 1
+       
         for player in self.players:
             player.receive_priority()
 
@@ -240,18 +237,11 @@ class GameState:
     # ==========================================================
 
     def get_personalized_state(self, player_id: str) -> Dict[str, Any]:
-        """
-        Get the game state filtered for a specific player.
-        
-        This hides the opponent's hand (only shows count).
-        """
-        # Get the phase string
-        phase_str = self.current_phase.value if hasattr(self.current_phase, 'value') else str(self.current_phase)
-        
+        """Get the game state filtered for a specific player."""
         state = {
             "turn": self.turn_number,
             "active_player": self.active_player.player_id if self.active_player else None,
-            "phase": phase_str,
+            "phase": self.current_phase.value if hasattr(self.current_phase, 'value') else str(self.current_phase),
             "priority_holder": self.priority_player.player_id if self.priority_player else None,
             "life_totals": {},
             "battlefield": {},
@@ -266,45 +256,30 @@ class GameState:
         for player in self.players:
             pid = player.player_id
             
-            # Life totals
             state["life_totals"][pid] = player.life
             
-            # ==========================================================
-            # CRITICAL FIX: Properly serialize battlefield
-            # ==========================================================
             state["battlefield"][pid] = []
             for card in player.battlefield:
                 entry = {
                     "id": card.card_id,
-                    "name": card.name,
                     "tapped": card.tapped
                 }
                 if card.is_creature():
+                    entry["damage"] = card.damage_marked
                     entry["power"] = card.power
                     entry["toughness"] = card.toughness
-                    entry["damage"] = card.damage_marked
                     entry["summoning_sick"] = card.summoning_sick
-                    entry["card_type"] = "Creature"
-                elif card.is_land():
-                    entry["card_type"] = "Land"
-                else:
-                    entry["card_type"] = card.card_type
                 state["battlefield"][pid].append(entry)
             
-            # Graveyard
             state["graveyard"][pid] = [card.card_id for card in player.graveyard]
-            
-            # Library count
             state["library_counts"][pid] = len(player.library)
             
-            # Hand (personalized - hide opponent's hand)
             if pid == player_id:
                 state["hand"][pid] = [card.card_id for card in player.hand]
                 state["hand_counts"][pid] = len(player.hand)
             else:
                 state["hand_counts"][pid] = len(player.hand)
 
-        # Stack
         for item in self.stack:
             state["stack"].append({
                 "stack_item_id": getattr(item, 'stack_item_id', 'stk_unknown'),

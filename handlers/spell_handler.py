@@ -318,29 +318,18 @@ def play_land(game_server, message):
     print(f"🏔️ {player_id} plays {card.name}")
     
     # ==========================================================
-    # Step 8: Play the land - CRITICAL: Remove from hand, add to battlefield
+    # Step 8: Play the land
     # ==========================================================
-    # Remove from hand
     player.hand.remove(card)
-    
-    # Add to battlefield
     player.battlefield.add(card)
     player.lands_played += 1
     
-    print(f"   📥 {card.name} moved from hand to battlefield")
-    print(f"   📊 {player_id} hand size: {len(player.hand)}, lands played: {player.lands_played}")
-    
     # Land doesn't use the stack
     
-    # ==========================================================
-    # Step 9: Broadcast updated state
-    # ==========================================================
+    # Broadcast updated state
     game_server._broadcast_personalized_state()
     
-    # ==========================================================
-    # Step 10: Grant priority to same player (they retain priority)
-    # ==========================================================
-    # NOTE: This increments the priority sequence number
+    # Grant priority to same player (they retain priority)
     game_server._give_priority()
 
 
