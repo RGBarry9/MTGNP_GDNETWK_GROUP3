@@ -1,225 +1,323 @@
-# models/card.py
 from dataclasses import dataclass, field
-from typing import List, Optional, Dict, Any
+from typing import (
+    List,
+    Optional,
+    Dict,
+    Any
+)
+
 from models.ability import Ability
 
 
-@dataclass
+@dataclass(init=False)
 class Card:
-    """
-    Base representation of a Magic card.
 
-    This class only stores card state.
-    Game rules are implemented by the engine.
-    The constructor.
-    """
-
-    # Identity
-    card_id: str  # MTGNP uses card_id for deck lists
+    card_id: str
     name: str
     card_type: str
 
-    # Card Information
     mana_cost: str = ""
     text: str = ""
-    colors: List[str] = field(default_factory=list)  # Required for MTGNP
 
-    # Creature Statistics
+    colors: List[str] = field(
+        default_factory=list
+    )
+
     power: int | None = None
     toughness: int | None = None
+
     damage_marked: int = 0
 
-    # State
     tapped: bool = False
+
     owner: str = ""
     controller: str = ""
-    summoning_sick: bool = False  # Required for combat rules
 
-    # Abilities & Effects
-    keywords: List[str] = field(default_factory=list)
-    abilities: List[Ability] = field(default_factory=list)
-    trigger: Optional[Dict[str, Any]] = None  # For triggered abilities
-    effects: List[Dict[str, Any]] = field(default_factory=list)  # For spell effects
+    summoning_sick: bool = False
 
+    keywords: List[str] = field(
+        default_factory=list
+    )
 
-    # Tapping
+    abilities: List[Ability] = field(
+        default_factory=list
+    )
+
+    trigger: Optional[
+        Dict[str, Any]
+    ] = None
+
+    effects: List[
+        Dict[str, Any]
+    ] = field(
+        default_factory=list
+    )
+
+    def __init__(
+        self,
+        card_id=None,
+        name="",
+        card_type="",
+        mana_cost="",
+        text="",
+        colors=None,
+        power=None,
+        toughness=None,
+        damage_marked=0,
+        tapped=False,
+        owner="",
+        controller="",
+        summoning_sick=False,
+        keywords=None,
+        abilities=None,
+        trigger=None,
+        effects=None,
+        id=None
+    ):
+
+        if card_id is None:
+            card_id = id
+
+        if card_id is None:
+            raise TypeError(
+                "Card requires card_id or id"
+            )
+
+        self.card_id = card_id
+        self.name = name
+        self.card_type = card_type
+        self.mana_cost = mana_cost
+        self.text = text
+        self.colors = (
+            list(colors)
+            if colors
+            else []
+        )
+
+        self.power = power
+        self.toughness = toughness
+
+        self.damage_marked = (
+            damage_marked
+        )
+
+        self.tapped = tapped
+
+        self.owner = owner
+        self.controller = controller
+
+        self.summoning_sick = (
+            summoning_sick
+        )
+
+        self.keywords = (
+            list(keywords)
+            if keywords
+            else []
+        )
+
+        self.abilities = (
+            list(abilities)
+            if abilities
+            else []
+        )
+
+        self.trigger = (
+            trigger.copy()
+            if trigger
+            else None
+        )
+
+        self.effects = [
+            effect.copy()
+            for effect in effects
+        ] if effects else []
+
     def tap(self):
-        """Tap this permanent."""
         self.tapped = True
 
     def untap(self):
-        """Untap this permanent."""
         self.tapped = False
 
-    def is_tapped(self) -> bool:
-        """Return True if the permanent is tapped."""
+    def is_tapped(self):
         return self.tapped
 
-    # ==================================================
-    # Combat Damage
-    # ==================================================
-
     def mark_damage(self, amount: int):
-        """Mark combat or spell damage on this creature."""
+
         if self.toughness is None:
             return
+
         if amount <= 0:
             return
+
         self.damage_marked += amount
 
     def heal_damage(self):
-        """Remove all marked damage. Called during cleanup step."""
         self.damage_marked = 0
 
-    def is_destroyed(self) -> bool:
-        """Return True if lethal damage has been marked."""
+    def is_destroyed(self):
+
         if self.toughness is None:
             return False
-        return self.damage_marked >= self.toughness
 
-    # ==================================================
-    # Card Type Helpers
-    # ==================================================
+        return (
+            self.damage_marked
+            >= self.toughness
+        )
 
-    def is_creature(self) -> bool:
+    def is_creature(self):
         return "Creature" in self.card_type
 
-    def is_land(self) -> bool:
+    def is_land(self):
         return "Land" in self.card_type
 
-    def is_instant(self) -> bool:
+    def is_instant(self):
         return "Instant" in self.card_type
 
-    def is_sorcery(self) -> bool:
+    def is_sorcery(self):
         return "Sorcery" in self.card_type
 
-    def is_artifact(self) -> bool:
+    def is_artifact(self):
         return "Artifact" in self.card_type
 
-    def is_enchantment(self) -> bool:
+    def is_enchantment(self):
         return "Enchantment" in self.card_type
 
-    def is_planeswalker(self) -> bool:
+    def is_planeswalker(self):
         return "Planeswalker" in self.card_type
 
-    def is_spell(self) -> bool:
-        """Return True if this is a spell (Instant or Sorcery)."""
-        return self.is_instant() or self.is_sorcery()
+    def is_spell(self):
+        return (
+            self.is_instant()
+            or self.is_sorcery()
+        )
 
-    def is_permanent(self) -> bool:
-        """Return True if this is a permanent card type."""
+    def is_permanent(self):
         return not self.is_spell()
 
-    # ==================================================
-    # Keywords
-    # ==================================================
-
-    def has_keyword(self, keyword: str) -> bool:
-        """Return True if the card has the specified keyword."""
+    def has_keyword(self, keyword):
         return keyword in self.keywords
 
-    def has_haste(self) -> bool:
-        """Return True if the card has Haste."""
+    def has_haste(self):
         return self.has_keyword("Haste")
 
-    def has_defender(self) -> bool:
-        """Return True if the card has Defender."""
+    def has_defender(self):
         return self.has_keyword("Defender")
 
-    def has_first_strike(self) -> bool:
-        """Return True if the card has First Strike."""
+    def has_first_strike(self):
         return self.has_keyword("First Strike")
 
-    def has_double_strike(self) -> bool:
-        """Return True if the card has Double Strike."""
+    def has_double_strike(self):
         return self.has_keyword("Double Strike")
 
-    def has_trample(self) -> bool:
-        """Return True if the card has Trample."""
+    def has_trample(self):
         return self.has_keyword("Trample")
 
-    def has_flying(self) -> bool:
-        """Return True if the card has Flying."""
+    def has_flying(self):
         return self.has_keyword("Flying")
 
-    def has_reach(self) -> bool:
-        """Return True if the card has Reach."""
+    def has_reach(self):
         return self.has_keyword("Reach")
 
-    def has_lifelink(self) -> bool:
-        """Return True if the card has Lifelink."""
+    def has_lifelink(self):
         return self.has_keyword("Lifelink")
 
-    # ==================================================
-    # Abilities
-    # ==================================================
-
-    def add_ability(self, ability: Ability):
-        """Add an ability to the card."""
+    def add_ability(self, ability):
         self.abilities.append(ability)
 
-    def remove_ability(self, ability: Ability):
-        """Remove an ability from the card."""
+    def remove_ability(self, ability):
+
         if ability in self.abilities:
-            self.abilities.remove(ability)
+            self.abilities.remove(
+                ability
+            )
 
-    def get_mana_abilities(self) -> List[Ability]:
-        """Get all mana abilities on this card."""
-        return [a for a in self.abilities if a.ability_type == "MANA"]
+    def get_mana_abilities(self):
+        return [
+            ability
+            for ability in self.abilities
+            if ability.ability_type == "MANA"
+        ]
 
-    def get_activated_abilities(self) -> List[Ability]:
-        """Get all activated abilities on this card."""
-        return [a for a in self.abilities if a.ability_type == "ACTIVATED"]
+    def get_activated_abilities(self):
+        return [
+            ability
+            for ability in self.abilities
+            if ability.ability_type == "ACTIVATED"
+        ]
 
-    def get_triggered_abilities(self) -> List[Ability]:
-        """Get all triggered abilities on this card."""
-        return [a for a in self.abilities if a.ability_type == "TRIGGERED"]
+    def get_triggered_abilities(self):
+        return [
+            ability
+            for ability in self.abilities
+            if ability.ability_type == "TRIGGERED"
+        ]
 
-    # ==================================================
-    # Utility
-    # ==================================================
+    def clone(self):
 
-    def clone(self) -> 'Card':
-        """
-        Create a copy of this card.
-        
-        Used when moving from deck to library during GAME_SETUP.
-        """
         return Card(
             card_id=self.card_id,
             name=self.name,
             card_type=self.card_type,
             mana_cost=self.mana_cost,
             text=self.text,
-            colors=self.colors.copy() if self.colors else [],
+            colors=(
+                self.colors.copy()
+                if self.colors
+                else []
+            ),
             power=self.power,
             toughness=self.toughness,
-            damage_marked=0,  # Reset damage on clone
-            tapped=False,     # Reset tapped state
+            damage_marked=0,
+            tapped=False,
             owner=self.owner,
             controller=self.controller,
-            summoning_sick=True,  # New clone has summoning sickness
-            keywords=self.keywords.copy() if self.keywords else [],
-            abilities=self.abilities.copy() if self.abilities else [],
-            trigger=self.trigger.copy() if self.trigger else None,
-            effects=[e.copy() for e in self.effects] if self.effects else []
+            summoning_sick=True,
+            keywords=(
+                self.keywords.copy()
+                if self.keywords
+                else []
+            ),
+            abilities=(
+                self.abilities.copy()
+                if self.abilities
+                else []
+            ),
+            trigger=(
+                self.trigger.copy()
+                if self.trigger
+                else None
+            ),
+            effects=[
+                effect.copy()
+                for effect in self.effects
+            ]
+            if self.effects
+            else []
         )
 
     def reset(self):
-        """
-        Reset temporary state.
-        Called during the cleanup phase.
-        """
+
         self.damage_marked = 0
         self.tapped = False
         self.summoning_sick = False
 
-    def __str__(self) -> str:
-        """String representation of the card."""
+    def __str__(self):
+
         if self.is_creature():
-            return f"{self.name} ({self.power}/{self.toughness})"
+            return (
+                f"{self.name} "
+                f"({self.power}/{self.toughness})"
+            )
+
         return self.name
 
-    def __repr__(self) -> str:
-        """Detailed string representation."""
-        return f"Card(id={self.card_id}, name={self.name}, type={self.card_type})"
+    def __repr__(self):
+
+        return (
+            f"Card("
+            f"id={self.card_id}, "
+            f"name={self.name}, "
+            f"type={self.card_type}"
+            f")"
+        )

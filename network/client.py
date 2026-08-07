@@ -1,42 +1,32 @@
-# network/client.py
 import socket
-from config.settings import HOST, PORT
+
+from config.settings import (
+    HOST,
+    PORT
+)
+
 from network.connection import Connection
 
 
 class Client:
-    """TCP client that connects to the MTGNP server."""
 
-    def __init__(self):
-        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        sock.connect((HOST, PORT))
-        self.connection = Connection(sock)
-        print(f"Connected to server at {HOST}:{PORT}")
-        self.running = True
+    def __init__(self, verbose=False):
 
-    def send(self, message):
-        """Send a message to the server."""
-        self.connection.send(message)
+        sock = socket.socket(
+            socket.AF_INET,
+            socket.SOCK_STREAM
+        )
 
-    def receive(self):
-        """Receive a message from the server."""
-        return self.connection.receive()
+        sock.connect(
+            (HOST, PORT)
+        )
 
-    def close(self):
-        """Close the connection."""
-        self.running = False
-        self.connection.close()
+        self.connection = Connection(
+            sock,
+            verbose=verbose,
+            label="CLIENT"
+        )
 
-    def start_message_loop(self, message_handler):
-        """
-        Start the main message loop.
-        
-        Args:
-            message_handler: Function to handle incoming messages
-        """
-        while self.running:
-            message = self.receive()
-            if message is None:
-                print("Disconnected from server.")
-                break
-            message_handler(message)
+        print(
+            "Connected to server."
+        )
