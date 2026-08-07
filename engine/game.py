@@ -82,6 +82,32 @@ class Game:
         print("🎮 GAME STARTING")
         print("="*60)
 
+        # ==========================================================
+        # Set up libraries from decks
+        # ==========================================================
+        for player in self.game_state.players:
+            if player.deck and len(player.deck) > 0:
+                player.library = player.deck.to_library()
+                player.life = 20
+                print(f"   📚 {player.player_id} library: {len(player.library)} cards")
+            else:
+                print(f"   ⚠️ {player.player_id} has no deck!")
+                from models.deck import Deck
+                from models.card import Card
+                deck = Deck()
+                for i in range(20):
+                    card = Card(
+                        card_id=f"card_{i:03d}",
+                        name=f"Card {i}",
+                        card_type="Land" if i < 10 else "Creature",
+                        power=2 if i >= 10 else None,
+                        toughness=2 if i >= 10 else None
+                    )
+                    deck.add(card)
+                player.deck = deck
+                player.library = deck.to_library()
+                print(f"   📚 {player.player_id} created default library: {len(player.library)} cards")
+
         # Initialize game state
         self.game_state.start_game()
         self.game_state.set_game_state(GameStateEnum.IN_GAME)
@@ -96,6 +122,11 @@ class Game:
         self.mulligan_manager.start()
         print("🃏 Mulligan phase started")
 
+        # ==========================================================
+        # CRITICAL FIX: Set the phase to MULLIGAN
+        # ==========================================================
+        self.game_state.set_phase(Phase.MULLIGAN)
+
         self._is_initialized = True
 
     def end_game(self, winner: Player) -> None:
@@ -105,17 +136,14 @@ class Game:
 
     def reset_game(self) -> None:
         """Reset the game for a new session."""
-        # Reset all managers
         self.mulligan_manager.reset()
         self.win_manager.reset()
         self.priority_manager.reset_for_new_game()
         
-        # Reset game state
         self.game_state.game_over = False
         self.game_state.started = False
         self.game_state.set_game_state(GameStateEnum.LOBBY)
         
-        # Clear all player states
         for player in self.game_state.players:
             player.battlefield.clear()
             player.hand.clear()

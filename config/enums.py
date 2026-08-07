@@ -10,6 +10,7 @@ class GameState(Enum):
 
 
 class Phase(Enum):
+    MULLIGAN = "MULLIGAN"  # ← ADD THIS
     UNTAP = "UNTAP"
     UPKEEP = "UPKEEP"
     DRAW = "DRAW"
